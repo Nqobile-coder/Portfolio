@@ -1,214 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nqobile Zakwe Portfolio</title>
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nqobile Zakwe — Digital Agent Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #000;
+  --text: #EEE;
+  --muted: #AAA;
+  --accent: #D6A558;
+  --card: #111;
+  --radius: 14px;
+  --transition: 0.4s ease;
+}
 
-  <!-- Styles -->
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+* { box-sizing: border-box; }
 
-    body {
-      font-family: 'Rubik', sans-serif;
-      background-color: #ffffff;
-      color: #333;
-      line-height: 1.6;
-    }
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  background: radial-gradient(circle at top left, #0a0a0a, #000);
+}
 
-    header {
-      background-color: #fefefe;
-      padding: 2rem;
-      text-align: center;
-      border-bottom: 3px solid #f2f2f2;
-    }
+a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover { color: var(--accent); }
 
-    header h1 {
-      font-family: 'Comic Neue', cursive;
-      font-size: 2.5rem;
-      color: #ff69b4;
-    }
+header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(20,20,20,0.9));
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition: background 0.4s ease;
+}
+header:hover { background: rgba(25,25,25,0.95); }
 
-    header p {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-      color: #666;
-    }
+.logo {
+  width: 92px;
+  height: 92px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 22px;
+  background: linear-gradient(135deg, var(--accent), #333);
+  color: var(--text);
+  box-shadow: 0 0 14px rgba(214,165,88,0.3);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.logo:hover { transform: rotate(10deg) scale(1.05); box-shadow: 0 0 20px rgba(214,165,88,0.6); }
 
-    nav {
-      margin-top: 1rem;
-    }
+.hero h1 {
+  margin: 0;
+  font-family: Merriweather, serif;
+  font-size: 28px;
+  letter-spacing: 0.4px;
+}
+.hero p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.contact { margin-top: 10px; display: flex; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
 
-    nav a {
-      text-decoration: none;
-      margin: 0 1rem;
-      color: #ff69b4;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
+nav {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+nav a {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 13px;
+  transition: all var(--transition);
+}
+nav a:hover {
+  transform: translateY(-3px);
+  background: var(--accent);
+  color: #000;
+}
 
-    nav a:hover {
-      color: #00bfff;
-    }
+section.card {
+  margin-top: 22px;
+  padding: 26px;
+  background: var(--card);
+  border-radius: 16px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out, box-shadow 0.3s;
+}
+section.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+section.card:hover {
+  box-shadow: 0 12px 30px rgba(214,165,88,0.3);
+}
 
-    section {
-      padding: 3rem 1rem;
-      max-width: 900px;
-      margin: auto;
-    }
+h2 {
+  margin: 0 0 12px;
+  font-family: Merriweather, serif;
+}
+.lead {
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+ul.small { padding-left: 20px; margin: 0; }
 
-    .bio, .fun-facts, .projects {
-      margin-bottom: 4rem;
-    }
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  margin-top: 12px;
+}
+.fact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--card);
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.fact:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(214,165,88,0.4);
+}
+.fact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(214,165,88,0.05));
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.fact:hover::before { opacity: 1; }
+.fact-img {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  transition: transform var(--transition);
+}
+.fact:hover .fact-img {
+  transform: scale(1.05) rotate(-1deg);
+}
 
-    h2 {
-      font-family: 'Comic Neue', cursive;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #ff69b4;
-    }
+.typewriter span {
+  border-right: 2px solid var(--accent);
+  padding-right: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0%, 50%, 100% { border-color: var(--accent); }
+  25%, 75% { border-color: transparent; }
+}
 
-    .bio p {
-      margin-bottom: 1rem;
-    }
+#chatInput {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #222;
+  color: #EEE;
+}
+#chatSubmit {
+  padding: 10px 20px;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+#chatSubmit:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(214,165,88,0.5);
+}
+#chatFeed div {
+  background: #111;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  transition: transform var(--transition), opacity 0.3s;
+  opacity: 0;
+}
+#chatFeed div.show { opacity: 1; transform: scale(1.03); }
 
-    .fun-facts .fact {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      transition: transform 0.3s ease;
-    }
-
-    .fun-facts .fact img {
-      width: 80px;
-      height: 80px;
-      border-radius: 10px;
-      margin-right: 1rem;
-    }
-
-    .fun-facts .fact:hover {
-      transform: scale(1.05);
-    }
-
-    .projects .project {
-      background-color: #f9f9f9;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border-radius: 10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .projects .project:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      border-top: 3px solid #f2f2f2;
-      color: #999;
-      font-size: 0.9rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      background-color: #ff69b4;
-      color: #fff;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-    }
-
-    .btn:hover {
-      background-color: #00bfff;
-    }
-  </style>
+footer {
+  margin: 40px 0 50px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+@media (max-width:900px) { header { flex-direction: column; align-items: flex-start; } }
+</style>
 </head>
-<body>
 
-  <!-- Header -->
-  <header>
+<body id="top">
+
+<header>
+  <div class="logo">NZ</div>
+  <div class="hero">
     <h1>Nqobile Zakwe</h1>
-    <p>Front-End Developer | Digital Creator | Aspiring Full-Stack Innovator | Digital Branding Enthusiast</p>
-    <nav>
-      <a href="#bio">Bio</a>
-      <a href="#fun-facts">Fun Facts</a>
-      <a href="#projects">Projects</a>
-    </nav>
-  </header>
+    <p class="typewriter" id="typewriter"></p>
+    <div class="contact">
+      <div>Johannesburg, South Africa</div>
+      <div>&middot;</div>
+      <div><a href="tel:+27649006316">064 900 6316</a></div>
+      <div>&middot;</div>
+      <div><a href="mailto:nqobile@servedbyjamboree.co.za">nqobile@servedbyjamboree.co.za</a></div>
+      <div>&middot;</div>
+      <div><a href="https://github.com/nqobilecoder" target="_blank">GitHub</a></div>
+      <div>&middot;</div>
+      <div><a href="https://www.linkedin.com/in/celiwe-mamello-zakwe-794157168/" target="_blank">LinkedIn</a></div>
+      <div>&middot;</div>
+      <div><a href="NqobileZakwe_CV.pdf" download>CV</a></div>
+    </div>
+  </div>
+</header>
 
-  <!-- Bio Section -->
-  <section class="bio" id="bio">
-    <h2>About Me</h2>
-    <p>Hello! I’m Nqobile Zakwe, a front-end developer passionate about merging creativity and technology to craft engaging digital experiences. I specialize in designing interactive, intuitive, and responsive web interfaces that are visually compelling and user-friendly. Beyond coding, I have experience in digital branding, helping build cohesive online identities and crafting visual narratives that resonate with audiences.</p>
-    
-    <p>My responsibilities include planning and executing web projects, writing clean and maintainable code, creating engaging UI/UX designs, and ensuring accessibility across devices. I also collaborate with teams to align branding, design, and technical requirements, ensuring consistency and impact across platforms.</p>
-    
-    <p>My experience spans multiple projects where I’ve developed responsive websites, integrated APIs, and implemented dynamic content. I have also worked on digital branding initiatives, where I strategized on design consistency, social media visuals, and user engagement. While my expertise lies in front-end development, I have a growing understanding of back-end logic, databases, and server-side integration to deliver seamless full-stack solutions.</p>
-    
-    <p>Looking forward, my aspiration is to become a full-stack developer who creates not only functional but meaningful digital experiences. I aim to lead projects that combine creativity, technology, and storytelling while continuously refining my skills and contributing to innovative digital solutions.</p>
-  </section>
+<nav>
+  <a href="#bio">Bio</a>
+  <a href="#personal">Personal</a>
+  <a href="#discussion">Discussion</a>
+  <a href="#contact">Contact</a>
+</nav>
 
-  <!-- Fun Facts -->
-  <section class="fun-facts" id="fun-facts">
-    <h2>Fun Facts About Me</h2>
+<section id="bio" class="card">
+  <h2>About Me</h2>
+  <p class="lead">Hi, I’m Nqobile (Cee Cee) Zakwe. I craft digital experiences that inspire action. I design youth-focused webpages, lead social campaigns, and create content blending creativity with measurable impact.</p>
+  <ul class="small">
+    <li>Designing user-friendly webpages and landing pages</li>
+    <li>Leading social media campaigns from concept to execution</li>
+    <li>Crafting engaging scripts, posts, and digital content</li>
+    <li>Analyzing metrics to measure impact and optimize campaigns</li>
+    <li>Managing accounts, liaising with clients, and supporting project strategy</li>
+    <li>Assisting with crafting content for print media, printing, and branding solutions</li>
+  </ul>
+</section>
 
+<section id="personal" class="card">
+  <h2>Personal — Fun Facts</h2>
+  <div class="facts-grid">
     <div class="fact">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=80&q=80" alt="God">
-      <p>I love God and nurturing my spiritual growth daily.</p>
+      <img src="https://images.unsplash.com/photo-1504252060320-2e8c5b3b489d?auto=format&fit=crop&w=600&q=80" alt="Faith" class="fact-img">
+      <p>I love God — my faith anchors me.</p>
     </div>
-
     <div class="fact">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=80&q=80" alt="Travel">
-      <p>Traveling excites me—I love discovering new places and cultures.</p>
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Reading" class="fact-img">
+      <p>Reading books stretches my mind and language.</p>
     </div>
-
     <div class="fact">
-      <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=80&q=80" alt="Books">
-      <p>Books are my window to knowledge and imagination.</p>
+      <img src="https://images.unsplash.com/photo-1619099619226-f96e319e3732?auto=format&fit=crop&w=600&q=80" alt="Documentaries" class="fact-img">
+      <p>Documentaries fascinate me — real stories, real history.</p>
     </div>
-
     <div class="fact">
-      <img src="https://images.unsplash.com/photo-1554284112-6b7989ed3aa8?auto=format&fit=crop&w=80&q=80" alt="Gym">
-      <p>The gym is my sanctuary for health and energy.</p>
+      <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=600&q=80" alt="Gym" class="fact-img">
+      <p>Gym sessions keep my mind and body grounded.</p>
     </div>
-
     <div class="fact">
-      <img src="https://images.unsplash.com/photo-1581090700227-3e65b2b972fa?auto=format&fit=crop&w=80&q=80" alt="Documentaries">
-      <p>Documentaries fuel my curiosity and expand my perspective.</p>
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" alt="Work ethic" class="fact-img">
+      <p>I study ambitious work ethics & the stories behind achievement.</p>
     </div>
-  </section>
-
-  <!-- Projects -->
-  <section class="projects" id="projects">
-    <h2>Featured Projects</h2>
-
-    <div class="project">
-      <h3>Interactive Portfolio Website</h3>
-      <p>Designed and developed a portfolio website to showcase skills, projects, and personal journey. Focused on responsive design, playful typography, and smooth user interactions reflecting both technical skill and creative branding.</p>
-      <a class="btn" href="https://github.com/nqobilecoder/Nqobile-Zakwe-Digital-Agent-Portfolio" target="_blank">View Repo</a>
+    <div class="fact">
+      <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&q=80" alt="Dream homes" class="fact-img">
+      <p>Dream of owning properties across four continents — mobility & perspective.</p>
     </div>
+  </div>
+</section>
 
-    <div class="project">
-      <h3>Digital Branding & Front-End Projects</h3>
-      <p>Worked on multiple front-end applications while also developing digital branding assets. This includes creating consistent visual identities, social media graphics, and web design elements, combining technical front-end skills with branding strategy for cohesive user experiences.</p>
-      <a class="btn" href="https://github.com/nqobilecoder" target="_blank">View More</a>
-    </div>
-  </section>
+<section id="discussion" class="card">
+  <h2>Let's Chat</h2>
+  <p class="lead">Share a skill, book, or dream destination that inspires you!</p>
+  <input id="chatInput" type="text" placeholder="Your thought...">
+  <button id="chatSubmit">Share</button>
+  <div id="chatFeed">
+    <div class="show">I recently tried learning calligraphy — it's harder than I thought but so satisfying!</div>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 Nqobile Zakwe. Built with 💖 and code.
-  </footer>
+<footer id="contact">
+  © 2025 Nqobile Zakwe. Crafted with passion and purpose.
+</footer>
+
+<script>
+// Typewriter effect
+const words = ["Digital Agent", "Creative Strategist", "Content Designer"];
+let i = 0, j = 0, isDeleting = false;
+const typewriter = document.getElementById("typewriter");
+
+function type() {
+  const word = words[i];
+  const current = isDeleting ? word.substring(0, j--) : word.substring(0, j++);
+  typewriter.innerHTML = `<span>${current}</span>`;
+  if (!isDeleting && j === word.length + 1) { isDeleting = true; setTimeout(type, 1200); }
+  else if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % words.length; }
+  setTimeout(type, isDeleting ? 70 : 120);
+}
+type();
+
+// Reveal on scroll
+const cards = document.querySelectorAll(".card");
+window.addEventListener("scroll", () => {
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) card.classList.add("visible");
+  });
+});
+
+// Chat logic with fade-in
+document.getElementById("chatSubmit").addEventListener("click", () => {
+  const input = document.getElementById("chatInput");
+  const text = input.value.trim();
+  if (text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    document.getElementById("chatFeed").prepend(div);
+    setTimeout(() => div.classList.add("show"), 50);
+    input.value = "";
+  }
+});
+
+// Scroll to top when clicking header (except links)
+document.querySelector("header").addEventListener("click", e => {
+  if (!e.target.closest("a")) window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
 
 </body>
 </html>
