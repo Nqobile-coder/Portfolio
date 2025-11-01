@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nqobile Zakwe — Digital Agent Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: #000;
+  --text: #EEE;
+  --muted: #AAA;
+  --accent: #D6A558; /* Muted Gold */
+  --card: #111;
+  --radius: 14px;
+  --transition: 0.4s ease;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:Inter,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;scroll-behavior:smooth;}
+a{color:var(--text);text-decoration:none;transition:color var(--transition);}
+a:hover{color:var(--accent);}
+header{display:flex;gap:20px;align-items:center;padding:24px;position:sticky;top:0;background:rgba(0,0,0,0.9);z-index:100;}
+.logo{width:92px;height:92px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;background:linear-gradient(135deg,var(--accent),#222);color:var(--text);transition:transform var(--transition);}
+.logo:hover{transform:rotate(10deg);}
+.hero h1{margin:0;font-family:Merriweather, serif;font-size:28px;letter-spacing:0.4px;}
+.hero p{margin:6px 0 0;color:var(--muted);font-size:14px;}
+.contact{margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted);}
+nav{display:flex;gap:10px;justify-content:center;margin:20px 0;}
+nav a{text-decoration:none;padding:8px 14px;border-radius:999px;background:var(--card);color:var(--text);font-weight:600;font-size:13px;transition:all var(--transition);}
+nav a:hover{transform:translateY(-3px);background:var(--accent);color:#000;}
+section.card{margin-top:22px;padding:26px;background:var(--card);border-radius:16px;opacity:0;transform:translateY(30px);transition:all 0.8s ease-out, box-shadow 0.3s;}
+section.card.visible{opacity:1;transform:translateY(0);}
+section.card:hover{box-shadow:0 12px 30px rgba(214,165,88,0.4);}
+h2{margin:0 0 12px;font-family:Merriweather, serif;}
+.lead{color:var(--muted);margin-bottom:12px;}
+ul.small{padding-left:20px;margin:0;}
+.columns{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start;}
+.metrics{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);}
+footer{margin:28px 0 50px;text-align:center;color:var(--muted);font-size:13px;}
+@media (max-width:900px){.columns{grid-template-columns:1fr;}}
+.typewriter span{border-right:2px solid var(--accent);padding-right:2px;white-space:nowrap;overflow:hidden;display:inline-block;animation:blink 1s infinite;} 
+@keyframes blink{0%,50%,100%{border-color:var(--accent);}25%,75%{border-color:transparent;}}
+.facts-grid {display: grid;grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));gap:18px;margin-top:12px;}
+.fact {display: flex;flex-direction: column;align-items: center;background:var(--card);padding:14px;border-radius:12px;text-align:center;transition: transform var(--transition), box-shadow var(--transition);}
+.fact:hover {transform: translateY(-3px);box-shadow:0 12px 25px rgba(214,165,88,0.4);}
+.fact-img {width: 100%;max-height:160px;object-fit:cover;border-radius:12px;margin-bottom:10px;}
+#chatInput{width:100%;padding:10px;margin:10px 0;border-radius:10px;border:none;outline:none;background:#222;color:#EEE;}
+#chatSubmit{padding:10px 20px;background:var(--accent);color:#000;border:none;border-radius:10px;cursor:pointer;transition:transform var(--transition);}
+#chatSubmit:hover{transform:scale(1.05);}
+#chatFeed div{background:#111;padding:10px;border-radius:10px;margin-bottom:6px;transition:transform var(--transition);}
+#chatFeed div:hover{transform:scale(1.03);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">NZ</div>
+  <div class="hero">
+    <h1>Nqobile Zakwe</h1>
+    <p class="typewriter" id="typewriter"></p>
+    <div class="contact">
+      <div>Johannesburg, South Africa</div>
+      <div>&middot;</div>
+      <div><a href="tel:+27649006316">064 900 6316</a></div>
+      <div>&middot;</div>
+      <div><a href="mailto:nqobile@servedbyjamboree.co.za">nqobile@servedbyjamboree.co.za</a></div>
+      <div>&middot;</div>
+      <div><a href="https://github.com/nqobilecoder" target="_blank">GitHub</a></div>
+      <div>&middot;</div>
+      <div><a href="https://www.linkedin.com/in/celiwe-mamello-zakwe-794157168/" target="_blank">LinkedIn</a></div>
+      <div>&middot;</div>
+      <div><a href="NqobileZakwe_CV.pdf" download>CV</a></div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="#bio">Bio</a>
+  <a href="#personal">Personal</a>
+  <a href="#discussion">Discussion</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="bio" class="card">
+  <h2>About Me</h2>
+  <p class="lead">Hi, I’m Nqobile (Cee Cee) Zakwe. I craft digital experiences that inspire action. I design youth-focused webpages, lead social campaigns, and create content blending creativity with measurable impact.</p>
+  <ul class="small">
+    <li>Designing user-friendly webpages and landing pages</li>
+    <li>Leading social media campaigns from concept to execution</li>
+    <li>Crafting engaging scripts, posts, and digital content</li>
+    <li>Analyzing metrics to measure impact and optimize campaigns</li>
+    <li>Managing accounts, liaising with clients, and supporting project strategy</li>
+    <li>Assisting with crafting content for print media, printing, and branding solutions</li>
+  </ul>
+</section>
+
+<section id="personal" class="card">
+  <h2>Personal — Fun Facts</h2>
+  <div class="facts-grid">
+    <div class="fact">
+      <img src="https://images.unsplash.com/photo-1504252060320-2e8c5b3b489d?auto=format&fit=crop&w=400&q=80" alt="Faith" class="fact-img">
+      <p>I love God — my faith anchors me.</p>
+    </div>
+    <div class="fact">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80" alt="Reading" class="fact-img">
+      <p>Reading books stretches my mind and language.</p>
+    </div>
+    <div class="fact">
+      <img src="https://images.unsplash.com/photo-1515165562835-c46c4ef6cf64?auto=format&fit=crop&w=400&q=80" alt="Documentaries" class="fact-img">
+      <p>Documentaries fascinate me — real stories, real history.</p>
+    </div>
+    <div class="fact">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Road trips" class="fact-img">
+      <p>Road trips with my husband, family & friends; ice cream dates are my joy.</p>
+    </div>
+    <div class="fact">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" alt="Work ethic" class="fact-img">
+      <p>I study ambitious work ethics & the stories behind achievement.</p>
+    </div>
+    <div class="fact">
+      <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=400&q=80" alt="Dream homes" class="fact-img">
+      <p>Dream of owning properties across four continents — mobility & perspective.</p>
+    </div>
+  </div>
+</section>
+
+<section id="discussion" class="card">
+  <h2>Let's Chat</h2>
+  <p class="lead">Share a skill, book, or dream destination that inspires you!</p>
+  <input id="chatInput" type="text" placeholder="Your thought...">
+  <button id="chatSubmit">Share</button>
+  <div id="chatFeed">
+    <div>I recently tried learning calligraphy — it's harder than I thought but so rewarding!</div>
+    <div>Watching a documentary about ancient civilizations changed how I think about history.</div>
+    <div>Dreaming of a road trip across Europe with ice cream stops at every city 🍦</div>
+  </div>
+</section>
+
+<section id="contact" class="card">
+  <h2>Contact</h2>
+  <p class="lead">Let’s collaborate, discuss opportunities, or view more work.</p>
+  <a href="NqobileZakwe_CV.pdf" download style="display:inline-block;margin-top:12px;padding:10px 20px;background:var(--accent);color:#000;border-radius:12px;font-weight:600;text-decoration:none;">Download CV</a>
+</section>
+
+<footer>
+  © <span id="year"></span> Nqobile Zakwe — Served by Jamboree
+</footer>
+
+<script>
+// Typewriter effect
+const words = ["Digital Storyteller", "System Enthusiast", "Creative Problem-Solver"];
+let i=0, j=0, currentWord='', isDeleting=false;
+const typeEl = document.getElementById('typewriter');
+function type(){
+  if(i>=words.length) i=0;
+  currentWord = words[i];
+  if(!isDeleting){
+    typeEl.innerHTML = currentWord.slice(0,j+1);
+    j++;
+    if(j===currentWord.length){isDeleting=true;setTimeout(type,1000);return;}
+  } else {
+    typeEl.innerHTML = currentWord.slice(0,j-1);
+    j--;
+    if(j===0){isDeleting=false;i++;setTimeout(type,300);return;}
+  }
+  setTimeout(type,100);
+}
+type();
+
+// Scroll animation for cards
+const cards = document.querySelectorAll('section.card');
+function checkVisible(){
+  const triggerBottom = window.innerHeight * 0.85;
+  cards.forEach(card => {
+    const top = card.getBoundingClientRect().top;
+    if(top < triggerBottom){card.classList.add('visible');}
+  });
+}
+window.addEventListener('scroll', checkVisible);
+checkVisible();
+
+// Discussion box
+const submit = document.getElementById('chatSubmit');
+const input = document.getElementById('chatInput');
+const feed = document.getElementById('chatFeed');
+submit.addEventListener('click', () => {
+  if(input.value.trim() === '') return;
+  const card = document.createElement('div');
+  card.textContent = input.value;
+  card.style.background = '#111';
+  card.style.padding = '10px';
+  card.style.borderRadius = '10px';
+  card.style.transition = 'transform 0.3s';
+  card.onmouseover = () => card.style.transform = 'scale(1.03)';
+  card.onmouseout = () => card.style.transform = 'scale(1)';
+  feed.prepend(card);
+  input.value = '';
+});
+input.addEventListener('keydown', (e) => { if(e.key==='Enter') submit.click(); });
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
