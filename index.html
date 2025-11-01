@@ -10,7 +10,7 @@
   --bg: #000;
   --text: #EEE;
   --muted: #AAA;
-  --accent: #D6A558; /* Muted Gold */
+  --accent: #D6A558;
   --card: #111;
   --radius: 14px;
   --transition: 0.4s ease;
@@ -19,7 +19,7 @@
 body{margin:0;font-family:Inter,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;scroll-behavior:smooth;}
 a{color:var(--text);text-decoration:none;transition:color var(--transition);}
 a:hover{color:var(--accent);}
-header{display:flex;gap:20px;align-items:center;padding:24px;position:sticky;top:0;background:rgba(0,0,0,0.9);z-index:100;}
+header{display:flex;gap:20px;align-items:center;padding:24px;position:sticky;top:0;background:rgba(0,0,0,0.9);z-index:100;cursor:pointer;}
 .logo{width:92px;height:92px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;background:linear-gradient(135deg,var(--accent),#222);color:var(--text);transition:transform var(--transition);}
 .logo:hover{transform:rotate(10deg);}
 .hero h1{margin:0;font-family:Merriweather, serif;font-size:28px;letter-spacing:0.4px;}
@@ -51,7 +51,7 @@ footer{margin:28px 0 50px;text-align:center;color:var(--muted);font-size:13px;}
 #chatFeed div:hover{transform:scale(1.03);}
 </style>
 </head>
-<body>
+<body id="top">
 
 <header>
   <div class="logo">NZ</div>
@@ -130,74 +130,57 @@ footer{margin:28px 0 50px;text-align:center;color:var(--muted);font-size:13px;}
   <input id="chatInput" type="text" placeholder="Your thought...">
   <button id="chatSubmit">Share</button>
   <div id="chatFeed">
-    <div>I recently tried learning calligraphy — it's harder than I thought but so rewarding!</div>
-    <div>Watching a documentary about ancient civilizations changed how I think about history.</div>
-    <div>Dreaming of a road trip across Europe with ice cream stops at every city 🍦</div>
+    <div>I recently tried learning calligraphy — it's harder than I thought but so satisfying!</div>
   </div>
 </section>
 
-<section id="contact" class="card">
-  <h2>Contact</h2>
-  <p class="lead">Let’s collaborate, discuss opportunities, or view more work.</p>
-  <a href="NqobileZakwe_CV.pdf" download style="display:inline-block;margin-top:12px;padding:10px 20px;background:var(--accent);color:#000;border-radius:12px;font-weight:600;text-decoration:none;">Download CV</a>
-</section>
-
-<footer>
-  © <span id="year"></span> Nqobile Zakwe — Served by Jamboree
+<footer id="contact">
+  © 2025 Nqobile Zakwe. Crafted with passion and purpose.
 </footer>
 
 <script>
 // Typewriter effect
-const words = ["Digital Storyteller", "System Enthusiast", "Creative Problem-Solver"];
-let i=0, j=0, currentWord='', isDeleting=false;
-const typeEl = document.getElementById('typewriter');
-function type(){
-  if(i>=words.length) i=0;
-  currentWord = words[i];
-  if(!isDeleting){
-    typeEl.innerHTML = currentWord.slice(0,j+1);
-    j++;
-    if(j===currentWord.length){isDeleting=true;setTimeout(type,1000);return;}
-  } else {
-    typeEl.innerHTML = currentWord.slice(0,j-1);
-    j--;
-    if(j===0){isDeleting=false;i++;setTimeout(type,300);return;}
-  }
-  setTimeout(type,100);
+const words = ["Digital Agent", "Creative Strategist", "Content Designer"];
+let i = 0, j = 0, current = "", isDeleting = false;
+const typewriter = document.getElementById("typewriter");
+
+function type() {
+  const word = words[i];
+  current = isDeleting ? word.substring(0, j--) : word.substring(0, j++);
+  typewriter.innerHTML = `<span>${current}</span>`;
+  if (!isDeleting && j === word.length + 1) { isDeleting = true; setTimeout(type, 1200); }
+  else if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % words.length; }
+  setTimeout(type, isDeleting ? 70 : 120);
 }
 type();
 
-// Scroll animation for cards
-const cards = document.querySelectorAll('section.card');
-function checkVisible(){
-  const triggerBottom = window.innerHeight * 0.85;
+// Reveal cards on scroll
+const cards = document.querySelectorAll(".card");
+window.addEventListener("scroll", () => {
   cards.forEach(card => {
-    const top = card.getBoundingClientRect().top;
-    if(top < triggerBottom){card.classList.add('visible');}
+    const rect = card.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) card.classList.add("visible");
   });
-}
-window.addEventListener('scroll', checkVisible);
-checkVisible();
-
-// Discussion box
-const submit = document.getElementById('chatSubmit');
-const input = document.getElementById('chatInput');
-const feed = document.getElementById('chatFeed');
-submit.addEventListener('click', () => {
-  if(input.value.trim() === '') return;
-  const card = document.createElement('div');
-  card.textContent = input.value;
-  card.style.background = '#111';
-  card.style.padding = '10px';
-  card.style.borderRadius = '10px';
-  card.style.transition = 'transform 0.3s';
-  card.onmouseover = () => card.style.transform = 'scale(1.03)';
-  card.onmouseout = () => card.style.transform = 'scale(1)';
-  feed.prepend(card);
-  input.value = '';
 });
-input.addEventListener('keydown', (e) => { if(e.key==='Enter') submit.click(); });
-document.getElementById('year').textContent = new Date().getFullYear();
+
+// Chat feature
+document.getElementById("chatSubmit").addEventListener("click", () => {
+  const input = document.getElementById("chatInput");
+  const text = input.value.trim();
+  if (text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    document.getElementById("chatFeed").prepend(div);
+    input.value = "";
+  }
+});
+
+// Make entire header clickable to scroll to top, except links
+document.querySelector("header").addEventListener("click", e => {
+  if (!e.target.closest("a")) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+});
 </script>
 
 </body>
